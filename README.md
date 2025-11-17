@@ -21,9 +21,58 @@ git clone https://github.com/your-username/navi-grammar-parser.git
 cd navi-grammar-parser
 ```
 
-## Usage 
+## Basic Usage 
 ```bash
-# Setting parameters
+from navi_parser import create_parser
+
+# Create parser with default settings
+parser = create_parser()
+
+# Analyze a sentence
+result = parser.analyze_sentence("Oel ngati kameie")
+```
+
+## Advanced Usage 
+```bash
+# Full analysis with all features
+parser = create_parser(
+    use_linguistic_analysis=True,  # Uses spaCy for enhanced analysis
+    enable_visualization=True,     # Generates charts and graphs
+    verbose=True                   # Detailed console output
+)
+```
+
+## Single sentence parsing
+```bash
+from navi_parser import create_parser
+
+# Initialize parser
+parser = create_parser(
+    use_linguistic_analysis=True,
+    enable_visualization=True,
+    verbose=True
+)
+
+# Analyze with automatic visualization
+result = parser.analyze_sentence(
+    "Oel ngati kameie ma tsmukan",
+    save_plots=True
+)
+```
+## Batch sentence parsing
+```bash
+# Analyze multiple sentences
+sentences = [
+    "Oel ngati kameie",
+    "Kaltxì ma frapo", 
+    "Nga za'u ftu po"
+]
+
+results = parser.analyze_multiple_sentences(
+    sentences,
+    create_dashboard=True,
+    save_dashboard=True
+)
 ```
 <div align="center">
  
