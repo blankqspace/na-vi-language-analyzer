@@ -1,10 +1,7 @@
 from typing import List, Dict, Optional, Any
 from abc import ABC, abstractmethod
 
-from word_classes import (
-    NaviWord, NaviNoun, NaviVerb, NaviPronoun, NaviAdjective,
-    NaviNumber, NaviParticle, NaviPrenoun
-)
+from word_classes import NaviWord, NaviNoun, NaviVerb, NaviPronoun, NaviAdjective, NaviNumber, NaviParticle, NaviPrenoun
 from navi_errors import WordClassificationError
 
 
@@ -21,15 +18,14 @@ class WordClassificationContext:
 
 class WordClassifier(ABC):
     """Abstract base class for word classifiers"""
-    
+
+    # Classify a word and return appropriate word object
     @abstractmethod
     def classify(self, word: str, position: int) -> Optional[NaviWord]:
-        """Classify a word and return appropriate word object"""
         pass
-    
+    # Check if this classifier can handle the given word
     @abstractmethod
     def can_classify(self, word: str) -> bool:
-        """Check if this classifier can handle the given word"""
         pass
 
 
@@ -163,13 +159,13 @@ class VerbClassifier(WordClassifier):
         return None
     
     def _remove_infixes(self, word: str) -> str:
-        # Simple infix removal - more sophisticated logic would be needed for production
+        # Simple infix removal 
         import re
         # Remove content between < and >
         return re.sub(r'<[^>]*>', '', word)
     
     def _is_compound(self, word: str) -> bool:
-        # Check if word appears to be compound (contains hyphen or known patterns)
+        # Check if word appears to be compound 
         return '-' in word or len(word) > 8
 
 
@@ -291,9 +287,8 @@ class NaviWordFactory:
             VerbClassifier(),
             NounClassifier()
         ]
-    
+    # Create a word object using appropriate classifier
     def create_word(self, word: str, position: int) -> NaviWord:
-        """Create a word object using appropriate classifier"""
         for classifier in self.classifiers:
             if classifier.can_classify(word):
                 result = classifier.classify(word, position)
@@ -303,9 +298,8 @@ class NaviWordFactory:
         # Default to noun if no classifier matches
         return NaviNoun(word, position, case="subjective", number="singular")
 
-
+# ontext-aware word factory that considers surrounding words
 class ContextAwareWordFactory(NaviWordFactory):
-    """Context-aware word factory that considers surrounding words"""
     
     def create_word_from_context(self, context: WordClassificationContext) -> NaviWord:
         """Create word using context information"""
@@ -323,3 +317,4 @@ class ContextAwareWordFactory(NaviWordFactory):
         
         # Use parent factory for general classification
         return self.create_word(word, position)
+
