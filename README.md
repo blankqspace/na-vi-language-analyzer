@@ -9,8 +9,9 @@
 ## :page_facing_up: Features
 
 - **Linguistic accuracy**: Based on [dict-navi.com](https://dict-navi.com) data 
-- **API Integration:** Fetches word data from Navi dictionary API 
-- **Data Visualization**: Creates POS distribution bar charts
+- **API Integration:** Fetches word data from Navi dictionary API
+- **Available without Internet:** Fetches word data from TSV file
+- **Data Visualization**: Creates POS distribution baavailabler charts
 
 ## :open_file_folder: Installation
 
@@ -24,15 +25,15 @@ pip install -r requirements.txt
 ```python
 from NaviParser import NaviParser
 
-parser = NaviParser()
+parser = NaviParser("config.yaml")
 
 sentence = "Oel ngati kameie, ma tsmukan!"
-print(f"Parsing: {sentence}")
+print(f"Parsing sentence: {sentence}")
 
 df = parser.parse_sentence(sentence)
-print(df)
-
 parser.plot_pos_distribution()
+parser.save_results_tsv()
+
 ```
 
 ## Dependencies
