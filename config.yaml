@@ -1,3 +1,6 @@
-api:
-  timeout: 30
-  retry_attempts: 20
+provider:
+  type: "api"      # или "tsv"
+  api_url: "https://dict-navi.com/api/list"
+  timeout: 5
+  retry_attempts: 3
+  tsv_path: "dict_navi_table.tsv"

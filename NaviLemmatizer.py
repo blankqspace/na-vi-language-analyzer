@@ -1,4 +1,5 @@
 import json
+from logger import log, logger
 from pathlib import Path
 
 
@@ -15,13 +16,17 @@ class NaviLemmatizer:
                 with open("exceptions.json", "r", encoding="utf-8") as f:
                     self.lemma_exceptions = json.load(f)
             except ValueError:
-                print("File is empty, add exceptions.")
+                logger.warning("File is not valid JSON or is empty", path)
                 self.lemma_exceptions = {}
         else:
-            print("Create exceptions.json")
+            logger.info("No exceptions file found.")
             self.lemma_exceptions = {}
 
-    def lemmatize(self, word=str) -> str:
+    @log
+    def lemmatize(self, word: str) -> str:
+        if not isinstance(word, str):
+            raise TypeError("Word must be a string")
+
         original = word
         word = word.lower()
 
