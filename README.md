@@ -2,7 +2,7 @@
 
  # :blue_heart: Na’vi Language Analyzer :blue_heart:
 
-*Na'vi sentence analyzer using the dictionary API. The program automatically identifies parts of speech, grammatical characteristics, translation, and creates a visualization of the POS-distribution.*
+*Na'vi sentence analyzer using the dictionary API or tsv file. The program automatically identifies parts of speech, grammatical characteristics, translation, and creates a visualization of the POS-distribution.*
 
 </div>
 
